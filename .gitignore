@@ -1,3 +1,4 @@
-/v_env
-/static/uploaded-img/uploaded.png
+v_env/
+/static/uploaded-img/
 .env
+__pycache__/
