@@ -1,9 +1,6 @@
 from flask import Flask, request, render_template, jsonify
 import dotenv
 import os
-import util
-import asyncio
-
 from util.api_func import process_image
 
 dotenv.load_dotenv()
@@ -38,7 +35,7 @@ async def home():
             "success": "false",
             "message": str(e)
         }
-        return jsonify(response), 200
+        return jsonify(response), 500
 
 
 if __name__ == '__main__':

@@ -1,14 +1,14 @@
 import base64
 import hashlib
 from time import sleep
-
 import httpx
 import dotenv
 import os
 
 dotenv.load_dotenv()
 
-API_KEY = os.environ["API_KEY"]
+API_KEY = os.environ.get("API_KEY")
+_BASE_URL = os.environ.get("BASE_URL")
 
 # Open the image to upload - change this in order to upload your image
 IMAGE_PATH = "./static/uploaded-img/uploaded.png"
@@ -17,7 +17,6 @@ CONTENT_TYPE = "image/jpeg"
 OUTPUT_CONTENT_TYPE = "image/jpeg"
 
 _TIMEOUT = 60
-_BASE_URL = os.environ["BASE_URL"]
 
 
 def _get_image_md5_content() -> tuple[str, bytes]:
@@ -75,9 +74,10 @@ async def process_image() -> None:
                 sleep(2)
 
         # Print the output URL to download the enhanced image
-        print(response.json()["result"]["output_url"])
         return response.json()["result"]["output_url"]
 
+async def main():
+    await process_image()
 
 if __name__ == '__main__':
-    process_image()
+    main()
